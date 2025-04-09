@@ -13,7 +13,7 @@ async function bootstrap() {
 
   // Configurar prefijo global para API
   app.setGlobalPrefix('api');
-  
+
 
   // Configuración de Swagger
   const config = new DocumentBuilder()
@@ -39,13 +39,13 @@ async function bootstrap() {
   // Configurar CORS
   // Configurar CORS para permitir solicitudes desde tu frontend
   app.enableCors({
-    origin: ['https://tu-frontend.com', 'http://localhost:3000'],
+    origin: '*',
     methods: ['GET', 'POST', 'PUT', 'DELETE'],
     credentials: true,
   });
 
-  // Obtener puerto desde configuración
-  const port = configService.get<number>('PORT', 3001);
+  // Puerto desde configuración
+  const port = process.env.PORT || 3001;
 
   await app.listen(port, '0.0.0.0'); // '0.0.0.0' para permitir conexiones desde fuera del contenedor
   console.log(`Application running on port ${port}`);
