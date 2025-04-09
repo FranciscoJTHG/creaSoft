@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14-alpine
+    container_name: movie-prediction-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: movie-prediction-api
+    restart: unless-stopped
+    env_file:
+      - .env
+    environment:
+      - TENSORFLOW_FORCE_BUILD_FROM_SOURCE=1
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      - postgres
+    volumes:
+      # Modificamos los volúmenes para evitar sobrescribir node_modules
+      - ./src:/app/src
+      - ./ml-models:/app/ml-models
+      # NO montar ./:/app que sobrescribe node_modules
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+    networks:
+      - app-network
+    command: pnpm run start:dev  # Cambiamos npm a pnpm
+
+volumes:
+  postgres_data:
+
+networks:
+  app-network:

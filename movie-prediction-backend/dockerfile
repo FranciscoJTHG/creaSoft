@@ -1,0 +1,54 @@
+FROM node:20
+
+# Habilitar corepack para pnpm
+RUN corepack enable
+
+# Instalar dependencias necesarias para compilar módulos nativos
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    python3 \
+    python3-dev \
+    pkg-config \
+    libcairo2-dev \
+    libpango1.0-dev \
+    libjpeg-dev \
+    libgif-dev \
+    librsvg2-dev \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configurar pnpm
+ENV PNPM_HOME="/root/.local/share/pnpm"
+ENV PATH="${PNPM_HOME}:${PATH}"
+
+WORKDIR /app
+
+# Copiar archivos de configuración
+COPY package.json pnpm-lock.yaml* ./
+
+# Intentar una estrategia más directa para TensorFlow
+ENV PYTHON=/usr/bin/python3
+ENV NODE_OPTIONS="--max-old-space-size=4096"
+ENV TENSORFLOW_FORCE_BUILD_FROM_SOURCE=1
+
+# Instalar pnpm global y realizar instalación normal primero
+RUN pnpm config set node-linker hoisted
+RUN pnpm install --no-frozen-lockfile
+
+# Instalar TensorFlow de manera separada
+RUN npm install @tensorflow/tfjs-node --build-from-source
+
+# Copiar todo el código
+COPY . .
+
+# Comprobar compilación de TensorFlow
+RUN node -e "try { require('@tensorflow/tfjs-node'); console.log('TensorFlow.js instalado correctamente'); } catch(e) { console.error('ERROR: TensorFlow.js no se instaló correctamente:', e); process.exit(1); }"
+
+# Compilar TypeScript
+RUN pnpm run build
+
+# Exponer puerto
+EXPOSE 3001
+
+# Iniciar la aplicación
+CMD ["pnpm", "run", "start"]
