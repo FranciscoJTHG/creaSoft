@@ -66,4 +66,4 @@ RUN pnpm run build
 EXPOSE 3001
 
 # Iniciar la aplicación
-CMD ["pnpm", "run", "start"]
+CMD ["pnpm", "run", "start:prod"]
