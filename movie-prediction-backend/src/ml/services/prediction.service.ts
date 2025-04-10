@@ -68,7 +68,7 @@ export class PredictionService {
 
     // Ajustes según temporada de lanzamiento
     // Verano (mayo-agosto): temporada de blockbusters
-    if (month >= 4 && month <= 7) {
+    if (month >= 3 && month <= 7) {
       seasonalFactor = 1.15;
     }
     // Invierno (noviembre-diciembre): temporada de premios y películas familiares
@@ -86,7 +86,7 @@ export class PredictionService {
     }
 
     // Limitar la probabilidad entre 0 y 1
-    const adjustedProbability = Math.min(Math.max(probability * seasonalFactor, 0), 1);
+    const adjustedProbability = Math.min(Math.max(probability * seasonalFactor * dayFactor, 0), 1);
 
     return adjustedProbability;
   }
