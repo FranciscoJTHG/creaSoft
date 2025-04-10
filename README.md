@@ -1,9 +1,9 @@
 <p align="center">
-  <img src="logo.png](https://drive.google.com/file/d/1ztEkF3ZSgCs1Vfo8jL-O5A2gB1kW7jmM/view?usp=drive_link" alt="CineMind logo" width="200"/>
+  <img src="Logo Cine Mind.png" alt="CineMind logo" width="200"/>
 </p>
 
 
-# 🎬 Movie Success Predictor
+# 🎬 Cine Mind
 
 Una aplicación web que utiliza inteligencia artificial para **predecir el éxito potencial de una película** antes de su estreno, basada en variables como presupuesto, género, fecha de estreno y duración. Ideal para productores, analistas y curiosos del cine que buscan tomar decisiones informadas.
 
