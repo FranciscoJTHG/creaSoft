@@ -42,7 +42,6 @@ async function bootstrap() {
     }),
   );
 
-  
   // Configurar CORS para permitir solicitudes desde tu frontend
   app.enableCors({
     origin: '*',
@@ -52,16 +51,6 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
-   // Añade estos logs
-  const server = app.getHttpServer();
-  const router = server._events.request._router;
-
-  console.log('=== RUTAS REGISTRADAS ===');
-  router.stack.forEach(layer => {
-    if (layer.route) {
-      console.log(`${Object.keys(layer.route.methods).map(m => m.toUpperCase()).join(',')} ${layer.route.path}`);
-    }
-  });
 
   // Puerto desde configuración
   const port = process.env.PORT || 3001;
