@@ -63,7 +63,7 @@ RUN node -e "try { require('@tensorflow/tfjs-node'); console.log('TensorFlow.js 
 RUN pnpm run build
 
 # Exponer puerto
-EXPOSE 3001
+EXPOSE 8080
 
 # Iniciar la aplicación
 CMD ["pnpm", "run", "start:prod"]
