@@ -22,9 +22,12 @@ async function bootstrap() {
     .setTitle('Movie Prediction API')
     .setDescription('API para predicción de películas basada en datos de TMDB')
     .setVersion('1.0')
+    .addServer('https://creasoft-production.up.railway.app/api', 'Production') // Añadir /api aquí
+    .addServer('http://localhost:8000/api', 'Local') // También para desarrollo local
     .addTag('movies')
     .addBearerAuth() // Si usas autenticación JWT
     .build();
+    
 
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api/docs', app, document); // Accesible en /api/docs
