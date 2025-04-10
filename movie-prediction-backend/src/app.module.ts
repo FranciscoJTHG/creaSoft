@@ -15,22 +15,52 @@ import { DataCollectionModule } from './data-collection/data-collection.module';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        // Detectar si estamos en Railway (si existe DATABASE_URL)
-        const isRailway = !!process.env.DATABASE_URL;
+        // Debug: Mostrar las variables de entorno disponibles
+        console.log('Verificando variables de entorno:');
+        console.log('DATABASE_URL:', process.env.DATABASE_URL ? 'Disponible' : 'No disponible');
+        console.log('PGHOST:', process.env.PGHOST ? 'Disponible' : 'No disponible');
+        console.log('PGUSER:', process.env.PGUSER ? 'Disponible' : 'No disponible');
+
+        // Mejor detección del entorno Railway
+        const isRailway = !!(
+          process.env.DATABASE_URL ||
+          (process.env.PGHOST && process.env.PGUSER)
+        );
 
         if (isRailway) {
-          // Configuración para Railway usando variables de entorno de Railway
-          console.log('Usando configuración de Railway');
-          return {
-            type: 'postgres',
-            url: process.env.DATABASE_URL,
-            ssl: { rejectUnauthorized: false },
-            entities: [__dirname + '/**/*.entity{.ts,.js}'],
-            synchronize: true, // Considerar cambiarlo a false en producción
-          };
+          console.log('╔══════════════════════════════════════╗');
+          console.log('║         RAILWAY ENVIRONMENT          ║');
+          console.log('╚══════════════════════════════════════╝');
+
+          // Si tenemos DATABASE_URL, usarlo directamente
+          if (process.env.DATABASE_URL) {
+            return {
+              type: 'postgres',
+              url: process.env.DATABASE_URL,
+              entities: [__dirname + '/**/*.entity{.ts,.js}'],
+              synchronize: true,
+              ssl: { rejectUnauthorized: false },
+            };
+          }
+          // Si tenemos variables individuales
+          else {
+            return {
+              type: 'postgres',
+              host: process.env.PGHOST,
+              port: parseInt(process.env.PGPORT || '5432'),
+              username: process.env.PGUSER,
+              password: process.env.PGPASSWORD,
+              database: process.env.PGDATABASE,
+              entities: [__dirname + '/**/*.entity{.ts,.js}'],
+              synchronize: true,
+              ssl: { rejectUnauthorized: false },
+            };
+          }
         } else {
-          // Configuración local usando variables de appConfig
-          console.log('Usando configuración local');
+          console.log('╔══════════════════════════════════════╗');
+          console.log('║          LOCAL ENVIRONMENT           ║');
+          console.log('╚══════════════════════════════════════╝');
+
           return {
             type: 'postgres',
             host: configService.get('database.host'),
@@ -39,13 +69,12 @@ import { DataCollectionModule } from './data-collection/data-collection.module';
             password: configService.get('database.password'),
             database: configService.get('database.database'),
             entities: [__dirname + '/**/*.entity{.ts,.js}'],
-            synchronize: true, // Solo para desarrollo
+            synchronize: true,
           };
         }
       },
     }),
     DataCollectionModule,
-    // Otros módulos
   ],
   controllers: [],
   providers: [],
