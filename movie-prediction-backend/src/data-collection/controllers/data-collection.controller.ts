@@ -53,7 +53,7 @@ export class DataCollectionController {
     //   },
     // },
   })
-  @Get('test-connection')
+  @Get('/')
   async testTmdbConnection() {
     try {
       // Usa un método existente como fetchMovieDetails o implementa uno nuevo
