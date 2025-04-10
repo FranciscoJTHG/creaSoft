@@ -17,10 +17,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   const configService = app.get(ConfigService);
 
-  // Configurar prefijo global para API
-  app.setGlobalPrefix('api');
-
-
   // Configuración de Swagger
   const config = new DocumentBuilder()
     .setTitle('Movie Prediction API')

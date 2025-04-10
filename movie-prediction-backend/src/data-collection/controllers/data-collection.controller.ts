@@ -8,7 +8,7 @@ import { Genre } from '../../movies/entities/genre.entity';
 import { DataPreprocessingService } from '../../ml/services/data-preprocessing.service';
 
 @ApiTags('data-collection')
-@Controller('(api/data')
+@Controller('data')
 export class DataCollectionController {
   private readonly logger = new Logger('DataCollectionController');
 
@@ -108,7 +108,7 @@ export class DataCollectionController {
     this.logger.log('Preparando datos para entrenamiento');
 
     // Aquí necesitarías inyectar un DataPreprocessingService
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+
     await this.dataPreprocessingService.prepareTrainingData();
 
     return {
@@ -127,12 +127,12 @@ export class DataCollectionController {
     this.logger.log('Validando calidad de los datos');
 
     // Implementar validación de datos (películas sin información, outliers, etc.)
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+
     const validation = await this.dataPreprocessingService.validateDataQuality();
 
     return {
       status: 'success',
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
+
       validation,
     };
   }
