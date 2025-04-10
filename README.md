@@ -2,7 +2,12 @@
   <img src="Logo Cine Mind.png" alt="CineMind logo" width="200"/>
 </p>
 
+## Links del proyecto
+- **Figma:** https://www.figma.com/design/ms3mwBZM9GEWcQjqJaplDl/AI-Movie-predictor?node-id=0-1&t=EDojiqs1jjQdpxLz-1
+- **Back-End:** https://creasoft-production.up.railway.app/api/docs
+- **Front-End:**
 
+  
 # 🎬 Cine Mind
 
 Una aplicación web que utiliza inteligencia artificial para **predecir el éxito potencial de una película** antes de su estreno, basada en variables como presupuesto, género, fecha de estreno y duración. Ideal para productores, analistas y curiosos del cine que buscan tomar decisiones informadas.
