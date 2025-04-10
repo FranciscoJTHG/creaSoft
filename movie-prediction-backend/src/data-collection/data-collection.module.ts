@@ -7,10 +7,11 @@ import { TmdbApiService } from './services/tmdb-api.service';
 import { Movie } from '../movies/entities/movie.entity';
 import { Genre } from '../movies/entities/genre.entity';
 import { MlModule } from '../ml/ml.module';
+import { DataPreprocessingService } from 'src/ml/services/data-preprocessing.service';
 
 @Module({
   imports: [HttpModule, TypeOrmModule.forFeature([Movie, Genre]), ConfigModule, MlModule],
   controllers: [DataCollectionController],
-  providers: [TmdbApiService],
+  providers: [TmdbApiService, DataPreprocessingService],
 })
 export class DataCollectionModule {}
