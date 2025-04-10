@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { DataCollectionModule } from './data-collection/data-collection.module';
 
 @Module({
   imports: [
@@ -12,8 +13,16 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => {
-        // Prioridad a variables de entorno directas
-        const host = process.env.PGHOST || configService.get('PGHOST') || 'localhost';
+        // Detectar entorno
+        const isDocker = process.env.DOCKER_ENV === 'true';
+        const isProduction = process.env.NODE_ENV === 'production';
+
+        // En Docker local, usa el nombre del servicio; en Railway, usa variables de entorno
+        const host =
+          isDocker && !isProduction
+            ? 'postgres' // Nombre del servicio en docker-compose
+            : process.env.PGHOST || configService.get('PGHOST') || 'localhost';
+
         const port = parseInt(process.env.PGPORT || configService.get('PGPORT') || '5432');
         const username = process.env.PGUSER || configService.get('PGUSER') || 'postgres';
         const password = process.env.PGPASSWORD || configService.get('PGPASSWORD') || 'postgres';
@@ -24,6 +33,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           - Puerto: ${port}
           - Usuario: ${username}
           - Base de datos: ${database}
+          - Docker: ${isDocker}
+          - Producción: ${isProduction}
         `);
 
         return {
@@ -35,11 +46,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
           database,
           entities: [__dirname + '/**/*.entity{.ts,.js}'],
           synchronize: true,
-          ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
+          ssl: isProduction ? { rejectUnauthorized: false } : false,
         };
       },
     }),
     // Otros módulos
+    DataCollectionModule,
   ],
 })
 export class AppModule {}

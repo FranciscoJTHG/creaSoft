@@ -47,12 +47,6 @@ RUN pnpm add @tensorflow/tfjs-node --no-strict-peer-dependencies
 # Y luego reconstruir explícitamente
 RUN cd node_modules/@tensorflow/tfjs-node && npm run install --build-addon-from-source
 
-# Copiar el script de parche
-COPY fix-typeorm-crypto.js ./
-
-# Ejecutar el script de parche
-RUN node fix-typeorm-crypto.js
-
 # Copiar todo el código
 COPY . .
 
@@ -62,8 +56,10 @@ RUN node -e "try { require('@tensorflow/tfjs-node'); console.log('TensorFlow.js 
 # Compilar TypeScript
 RUN pnpm run build
 
-# Exponer puerto
-EXPOSE 8080
+# Variables de entorno
+ENV NODE_ENV=production
+ENV PORT=8080
+EXPOSE $PORT
 
 # Iniciar la aplicación
 CMD ["pnpm", "run", "start:prod"]

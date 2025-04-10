@@ -26,6 +26,7 @@ services:
       - .env
     environment:
       - TENSORFLOW_FORCE_BUILD_FROM_SOURCE=1
+      - DOCKER_ENV=true  # Añade esta línea para indicar que estamos en Docker
     ports:
       - "${PORT}:${PORT}"
     depends_on:
