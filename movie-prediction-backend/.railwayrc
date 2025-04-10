@@ -1,5 +1,0 @@
-{
-  "hooks": {
-    "postinstall": "node fix-typeorm-crypto.js"
-  }
-}

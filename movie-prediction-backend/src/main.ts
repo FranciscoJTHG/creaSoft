@@ -1,5 +1,11 @@
 /* eslint-disable */
+// Añade esta sección al INICIO de tu archivo main.ts (antes de cualquier otro import)
 import * as crypto from 'crypto';
+
+// Agregar crypto al objeto global
+if (!(global as any).crypto) {
+  (global as any).crypto = crypto;
+}
 
 import { NestFactory } from '@nestjs/core';
 import { ValidationPipe } from '@nestjs/common';
