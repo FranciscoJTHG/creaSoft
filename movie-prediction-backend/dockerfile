@@ -47,6 +47,12 @@ RUN pnpm add @tensorflow/tfjs-node --no-strict-peer-dependencies
 # Y luego reconstruir explícitamente
 RUN cd node_modules/@tensorflow/tfjs-node && npm run install --build-addon-from-source
 
+# Copiar el script de parche
+COPY fix-typeorm-crypto.js ./
+
+# Ejecutar el script de parche
+RUN node fix-typeorm-crypto.js
+
 # Copiar todo el código
 COPY . .
 

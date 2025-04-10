@@ -24,5 +24,9 @@
     "resolveJsonModule": true,
     "allowJs": true
   },
-  "include": ["src/**/*", "webpack-hmr.config.js"]
+  "include": ["src/**/*", "webpack-hmr.config.js", "*.js"],
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
 }
