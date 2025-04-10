@@ -50,6 +50,8 @@ async function bootstrap() {
     credentials: true,
   });
 
+  app.setGlobalPrefix('api');
+
   // Puerto desde configuración
   const port = process.env.PORT || 3001;
 
