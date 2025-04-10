@@ -8,7 +8,7 @@ import { Genre } from '../../movies/entities/genre.entity';
 import { DataPreprocessingService } from '../../ml/services/data-preprocessing.service';
 
 @ApiTags('data-collection')
-@Controller('data')
+@Controller('(api/data')
 export class DataCollectionController {
   private readonly logger = new Logger('DataCollectionController');
 

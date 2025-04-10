@@ -51,6 +51,13 @@ async function bootstrap() {
 
   app.setGlobalPrefix('api');
 
+  const router = app.getHttpServer()._events.request._router;
+  router.stack.forEach(layer => {
+    if (layer.route) {
+      console.log(`${layer.route.stack[0].method.toUpperCase()} ${layer.route.path}`);
+    }
+  });
+
 
   // Puerto desde configuración
   const port = process.env.PORT || 3001;
