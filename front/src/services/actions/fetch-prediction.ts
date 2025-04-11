@@ -11,7 +11,7 @@ type RequestData = {
 };
 
 export const fetchPrediction = async (requestData: RequestData) => {
-    const response = await fetch(`${url}/ml/predicts`, {
+    const response = await fetch(`${url}/ml/predict`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -20,7 +20,7 @@ export const fetchPrediction = async (requestData: RequestData) => {
     });
 
     if (!response.ok) {
-        const errorText = await response.text();
+        await response.text();
         throw new Error(`Error: ${response.status}`);
     }
 

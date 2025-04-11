@@ -12,6 +12,7 @@ export default function PredictionResults({
   recommendations = [],
 }: PredictionResultsProps) {
   const rate = (successRate * 100).toFixed(1);
+  const recomendaciones = [...recommendations];
 
   const radius = 80;
   const circumference = 2 * Math.PI * radius;
@@ -71,18 +72,20 @@ export default function PredictionResults({
       {/* Recommendations Section */}
       <div>
         <h4 className="text-xl font-semibold mb-2">Recomendaciones</h4>
-        {recommendations.map((rec, index) => {
-          return (
-            <li>
-              {" "}
-              <span
-                key={index}
-                className="text-gray-600 dark:text-gray-400 text-sm"
-              >
-                {rec}
-              </span>
-            </li>
-          );
+        <span className="text-gray-600 dark:text-gray-400 text-sm">
+          {recomendaciones[0]}
+        </span>
+        {recomendaciones.map((rec, index) => {
+          if (index > 0) {
+            return (
+              <li key={index}>
+                {" "}
+                <span className="text-gray-600 dark:text-gray-400 text-sm">
+                  {rec}
+                </span>
+              </li>
+            );
+          }
         })}
       </div>
     </div>
