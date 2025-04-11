@@ -54,10 +54,21 @@ El modelo utiliza estas características para predecir:
 
 ## 👥 Equipo
 
-- 👨‍💻 **3 Desarrolladores:** Vladimir Villacres (Front-End), Jorge Trujillo (Front-End) y Francisco Thielen (Back-End)
-- 🎨 **1 Diseñador/a UX/UI:** Alex Ruiz
-- 🧪 **1 QA Tester:** Mikhail Garcilano
-- 🧭 **1 Project Manager:** Mikhail Garcilano
+- 👨‍💻 **Desarrolladores:**
+  - Vladimir Villacres (Front-End)
+      - **LinkedIn:** https://www.linkedin.com/in/vladimir-villacres/
+  - Jorge Trujillo (Front-End)
+      - **LinkedIn:** https://www.linkedin.com/in/jorge-trujillo-ch/
+  - Francisco Thielen (Back-End)
+      - **LinkedIn:** https://www.linkedin.com/in/francisco-thielen-ingeniero-software/
+
+- 🎨 **Diseñador/a UX/UI:**
+  - Alex Ruiz
+    - **LinkedIn:** https://www.linkedin.com/in/alexruix
+
+- 🧪 **QA Tester:** Mikhail Garcilano
+- 🧭 **Project Manager:** Mikhail Garcilano
+  - **LinkedIn:** https://www.linkedin.com/in/mikhailgarcilano/
 
 ## 📝 Historias de Usuario
 
