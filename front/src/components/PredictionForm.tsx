@@ -47,8 +47,8 @@ export default function PredictionForm() {
       className="w-full mt-8 space-y-6 justify-items-center"
     >
       {/* Género */}
-      <section className="flex flex-row border border-gray-400 rounded-3xl py-4 px-16 shadow-lg gap-1 justify-between">
-        <div className="min-w-32 max-w-32">
+      <section className="flex flex-col lg:flex-row border border-gray-400 rounded-3xl py-4 px-8 lg:px-16 shadow-lg gap-4 lg:gap-1 justify-between w-11/12 lg:w-full">
+        <div className="w-full lg:w-32 min-w-32">
           <label
             htmlFor="genero"
             className="block text-sm font-medium text-black"
@@ -73,9 +73,9 @@ export default function PredictionForm() {
             )}
           </div>
         </div>
-        <div className="w-px bg-gray-300 mx-4"></div>
+        <div className="w-px bg-gray-300 mx-4 hidden lg:flex"></div>
         {/* Presupuesto */}
-        <div className="min-w-32 max-w-32">
+        <div className="w-full lg:w-32 min-w-32">
           <label
             htmlFor="presupuesto"
             className="block text-sm font-medium text-black"
@@ -98,9 +98,9 @@ export default function PredictionForm() {
             )}
           </div>
         </div>
-        <div className="w-px bg-gray-300 mx-4"></div>
+        <div className="w-px bg-gray-300 mx-4 hidden lg:block"></div>
         {/* Duración */}
-        <div className="min-w-32 max-w-32">
+        <div className="w-full lg:w-32 min-w-32">
           <label
             htmlFor="duracion"
             className="block text-sm font-medium text-black"
@@ -122,9 +122,9 @@ export default function PredictionForm() {
             )}
           </div>
         </div>
-        <div className="w-px bg-gray-300 mx-4"></div>
+        <div className="w-px bg-gray-300 mx-4 hidden lg:block"></div>
         {/* Fecha de estreno */}
-        <div className="min-w-32 max-w-32">
+        <div className="w-full lg:w-32 min-w-32">
           <label
             htmlFor="fecha_estreno"
             className="block text-sm font-medium text-black"
@@ -144,8 +144,8 @@ export default function PredictionForm() {
             )}
           </div>
         </div>
-        <div className="w-px bg-gray-300 mx-4"></div>
-        <div className="min-w-32 max-w-32">
+        <div className="w-px bg-gray-300 mx-4 hidden lg:block"></div>
+        <div className="w-full lg:w-32 min-w-32">
           <label
             htmlFor="director"
             className="block text-sm font-medium text-black"
