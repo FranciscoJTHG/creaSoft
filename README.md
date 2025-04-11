@@ -5,7 +5,7 @@
 ## Links del proyecto
 - **Figma:** https://www.figma.com/design/ms3mwBZM9GEWcQjqJaplDl/AI-Movie-predictor?node-id=0-1&t=EDojiqs1jjQdpxLz-1
 - **Back-End:** https://creasoft-production.up.railway.app/api/docs
-- **Front-End:**
+- **Front-End:** https://crea-soft-movies.vercel.app/
 
   
 # 🎬 Cine Mind
