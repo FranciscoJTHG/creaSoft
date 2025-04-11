@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Injectable, Logger } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
@@ -28,26 +29,23 @@ export class DataPreprocessingService {
     const movies = await this.moviesRepository.find({
       relations: ['genres'],
       where: [
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         { budget: (() => 'budget > 0') as any },
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         { revenue: (() => 'revenue > 0') as any },
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         { isSuccessful: (() => 'is_successful IS NOT NULL') as any },
       ],
     });
 
     this.logger.log(`Se encontraron ${movies.length} películas para entrenamiento`);
 
-    const features: MovieFeature[] = []; // Especificar el tipo del array
-    const labels: number[] = []; // Especificar el tipo del array
+    const features: MovieFeature[] = [];
+    const labels: number[] = [];
 
     for (const movie of movies) {
       // Extraer características relevantes para el modelo
       const movieFeatures: MovieFeature = {
         budget: this.normalize(movie.budget, 'budget'),
         runtime: this.normalize(movie.runtime, 'runtime'),
-        voteAverage: movie.voteAverage / 10, // ya está en escala 0-10
+        voteAverage: movie.voteAverage / 10,
         voteCount: this.normalize(movie.voteCount, 'voteCount'),
         genreIds: movie.genres.map((g) => g.id),
       };

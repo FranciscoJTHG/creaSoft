@@ -4,17 +4,6 @@ import { ModelTrainingService } from './model-training.service';
 import { PredictionRequestDto } from '../dto/prediction-request.dto';
 import { MoviePredictionResponse } from '../interfaces/movie-prediction.interface';
 
-// interface MoviePredictionResponse {
-//   success: boolean;
-//   probability: number;
-//   confidenceLevel: string;
-//   recommendations?: string[];
-//   factors?: {
-//     seasonalImpact: number;
-//     // Otros factores que quieras agregar en el futuro
-//   };
-// }
-
 @Injectable()
 export class PredictionService {
   private readonly logger = new Logger(PredictionService.name);
@@ -25,7 +14,7 @@ export class PredictionService {
    * Realiza una predicción del éxito de una película basada en sus características
    */
   async predictMovieSuccess(predictionDto: PredictionRequestDto): Promise<MoviePredictionResponse> {
-    // this.logger.log(`Realizando predicción para: ${predictionDto.title}`);
+    this.logger.log(`Realizando predicción para: ${predictionDto.title}`);
 
     // Obtener la predicción básica del modelo
     const basicPrediction = await this.modelTrainingService.predict(predictionDto);

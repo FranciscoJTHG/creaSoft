@@ -51,7 +51,7 @@ async function bootstrap() {
   app.setGlobalPrefix('api');
 
   // Puerto desde configuración
-  const port = process.env.PORT || 3001;
+  const port = process.env.PORT || 8080;
 
   await app.listen(port, '0.0.0.0'); // '0.0.0.0' para permitir conexiones desde fuera del contenedor
   console.log(`Application running on port ${port}`);

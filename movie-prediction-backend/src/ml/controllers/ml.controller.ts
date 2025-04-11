@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Controller, Post, Body, Get, Logger } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse } from '@nestjs/swagger';
 import { ModelTrainingService } from '../services/model-training.service';
@@ -66,7 +67,6 @@ export class ModelController {
   @ApiOperation({ summary: 'Obtener información del modelo actual' })
   @ApiResponse({ status: 200, description: 'Información del modelo' })
   @Get('model-info')
-  // eslint-disable-next-line @typescript-eslint/require-await
   async getModelInfo() {
     return this.modelTrainingService.getModelInfo();
   }

@@ -24,9 +24,20 @@ Una aplicación web que utiliza inteligencia artificial para **predecir el éxit
 ## 🧠 Inteligencia Artificial
 
 Este proyecto utiliza:
-- Modelo administrado con **tensorflow.js** que proporcionar modelos en blanco para ser entrenados
-- **Dataset IMDb** base generado a partir de ejemplos reales y sintéticos
+- Modelo de clasificación binaria en el cual se implementa un MLP o Red Neuronal Feed-Forward para ser entrenado
+- **Dataset IMDb** base generado a partir de ejemplos reales y sintéticos el cual proporciona los datos para el entrenamiento del modelo.
 - Algoritmo de regresión logística / árbol de decisión / random forest (según evolución)
+
+---
+
+## Caracteristicas de Entrada
+
+El modelo utiliza estas características para predecir: 
+- budget_normalized: Presupuesto normalizado
+- runtime_normalized: Duración normalizada
+- release_month: Mes de lanzamiento (1-12 dividido por 12)
+- release_day_of_week: Día de la semana (0-6 dividido por 6)
+- Indicadores de género: Representación one-hot para cada género
 
 ---
 

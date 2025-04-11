@@ -1,3 +1,4 @@
+/* eslint-disable */
 import { Injectable, OnModuleInit } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -44,11 +45,8 @@ export class ModelTrainingService implements OnModuleInit {
 
         // Cargar metadatos
         if (fs.existsSync(this.modelMetadataPath)) {
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
           const metadata = JSON.parse(fs.readFileSync(this.modelMetadataPath, 'utf-8'));
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-member-access
           this.featureNames = metadata.featureNames;
-          // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
           this.genres = new Set(metadata.genres);
         }
 
@@ -61,7 +59,6 @@ export class ModelTrainingService implements OnModuleInit {
     }
   }
 
-  // eslint-disable-next-line @typescript-eslint/require-await
   async buildModel(inputFeatures: number): Promise<tf.LayersModel> {
     const model = tf.sequential();
 
@@ -213,7 +210,6 @@ export class ModelTrainingService implements OnModuleInit {
   /**
    * Método para hacer predicciones
    */
-  // eslint-disable-next-line @typescript-eslint/require-await
   async predict(
     predictionDto: PredictionRequestDto,
   ): Promise<{ success: boolean; probability: number }> {
@@ -265,20 +261,16 @@ export class ModelTrainingService implements OnModuleInit {
     const maxRuntime = 240; // 4 horas como max
 
     // Características numéricas normalizadas
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     input.push(movieData.budget / maxBudget); // budget_normalized
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     input.push(movieData.runtime / maxRuntime); // runtime_normalized
 
     // Características de fecha
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
     const releaseDate = new Date(movieData.releaseDate);
     input.push((releaseDate.getMonth() + 1) / 12); // release_month
     input.push(releaseDate.getDay() / 6); // release_day_of_week
 
     // One-hot encoding para géneros
     Array.from(this.genres).forEach((genre) => {
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       const hasGenre = movieData.genres.some((g) => g.name === genre) ? 1 : 0;
       input.push(hasGenre);
     });
@@ -312,7 +304,6 @@ export class ModelTrainingService implements OnModuleInit {
       // Verificar si existe el archivo de metadatos
       if (fs.existsSync(this.modelMetadataPath)) {
         const metadataContent = fs.readFileSync(this.modelMetadataPath, 'utf-8');
-        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         metadata = JSON.parse(metadataContent);
       }
     } catch (error) {
@@ -324,7 +315,6 @@ export class ModelTrainingService implements OnModuleInit {
       // Si el modelo está cargado, incluir su arquitectura
       architecture: this.model ? JSON.stringify(this.model.toJSON()) : undefined,
       lastTrainingDate,
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       metadata,
     };
   }
